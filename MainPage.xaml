@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BerarDenisaLab7.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image x:Name="StudentImage" 
+               Source="student_image.jpeg" 
+               HeightRequest="150" 
+               WidthRequest="150" 
+               HorizontalOptions="Center" />
+
+
+            <Label
+                Text="Berar Denisa" 
+                FontSize="24" 
+                HorizontalOptions="Center" 
+                VerticalOptions="CenterAndExpand" />
+
+            <Label Text="Student in anul 3 IE!" 
+                   FontSize="20" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="EndAndExpand" />
+
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
