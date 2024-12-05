@@ -11,5 +11,6 @@
         </HorizontalStackLayout>
         <Label Text="This app will help you to manage your shopping lists" />
 
-    </VerticalStackLayout>
+    </VerticalStackLayout>
+
 </ContentPage>
