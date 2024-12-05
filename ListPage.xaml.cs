@@ -33,22 +33,22 @@ public partial class ListPage : ContentPage
 
     async void OnDeleteItemButtonClicked(object sender, EventArgs e)
     {
-        // Verific? dac? un produs este selectat din ListView
+        // Verifica daca un produs este selectat din ListView
         var selectedProduct = listView.SelectedItem as Product;
 
         if (selectedProduct != null)
         {
-            // ?terge produsul selectat din baza de date
+            // sterge produsul selectat din baza de date
             await App.Database.DeleteProductAsync(selectedProduct);
 
-            // Actualizeaz? lista de produse afi?at? în ListView
+            // Actualizeaza lista de produse afi?at? în ListView
             var shopList = (ShopList)BindingContext;
             listView.ItemsSource = await App.Database.GetListProductsAsync(shopList.ID);
         }
         else
         {
-            // Afi?eaz? un mesaj de eroare dac? nu este selectat niciun produs
-            await DisplayAlert("Eroare", "Selecta?i un produs pentru a-l ?terge.", "OK");
+            // Afiseaza un mesaj de eroare daca nu este selectat niciun produs
+            await DisplayAlert("Eroare", "Selectati un produs pentru a-l sterge.", "OK");
         }
     }
     protected override async void OnAppearing()
