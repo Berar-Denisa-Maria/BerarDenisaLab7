@@ -20,8 +20,7 @@ public partial class ShopEntryPage : ContentPage
             BindingContext = new Shop()
         });
     }
-    async void OnListViewItemSelected(object sender,
-   SelectedItemChangedEventArgs e)
+    async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem != null)
         {
