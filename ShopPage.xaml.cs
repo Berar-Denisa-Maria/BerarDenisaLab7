@@ -19,30 +19,32 @@ public partial class ShopPage : ContentPage
     async void OnShowMapButtonClicked(object sender, EventArgs e)
     {
         var shop = (Shop)BindingContext;
+
+       
         if (string.IsNullOrEmpty(shop.Adress))
         {
-            await DisplayAlert("Error", "Magazinul nu are adresa.", "OK");
+            await DisplayAlert("Error", "Magazinul nu are o adresa specificata.", "OK");
             return;
         }
-        var address = shop.Adress;
-        var locations = await Geocoding.GetLocationsAsync(address);
 
+        var shoplocation = new Location(46.7492379, 23.5745597); 
         var options = new MapLaunchOptions
         {
             Name = "Magazinul meu preferat"
         };
+
         
-        var shoplocation= new Location(46.7492379, 23.5745597);
-       
-        var myLocation = new Location(46.7731796289, 23.6213886738);
-       
+        var myLocation = new Location(46.7731796, 23.6213886);
+
+        
         var distance = myLocation.CalculateDistance(shoplocation, DistanceUnits.Kilometers);
+
         if (distance < 5)
         {
             var request = new NotificationRequest
             {
                 Title = "Ai de facut cumparaturi in apropiere!",
-                Description = address,
+                Description = "Magazinul este la mai putin de 5 km distanta.",
                 Schedule = new NotificationRequestSchedule
                 {
                     NotifyTime = DateTime.Now.AddSeconds(1)
@@ -51,6 +53,25 @@ public partial class ShopPage : ContentPage
             LocalNotificationCenter.Current.Show(request);
         }
 
+  
         await Map.OpenAsync(shoplocation, options);
     }
+    async void OnDeleteButtonClicked(object sender, EventArgs e)
+    {
+        var shop = (Shop)BindingContext;
+
+        if (shop == null || shop.ID == 0)
+        {
+            await DisplayAlert("Error", "Magazinul nu exista sau nu poate fi sters.", "OK");
+            return;
+        }
+
+        bool answer = await DisplayAlert("Confirmare", "Sigur doresti sa stergi acest magazin?", "Da", "Nu");
+        if (answer)
+        {
+            await App.Database.DeleteShopAsync(shop); 
+            await Navigation.PopAsync(); 
+        }
+    }
+
 }
